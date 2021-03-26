@@ -1,15 +1,26 @@
 import React from 'react';
-import PostlistItem from "../post_list_item";
-import './post-list.css';
 
-const PostList = () => {
-    return (
-        <ul className="app-list list-group" >
-<PostlistItem/>
-<PostlistItem/>
-<PostlistItem/>
-        </ul>
-    )
+import PostListItem from '../post_list_item';
+import './post-list.css'
+
+const PostList = ({ posts, onDelete }) => {
+
+	const elements = posts.map((item) => {
+		const { id, ...itemProps } = item;
+		return (
+			<li key={id} className='list-group-item'>
+				<PostListItem
+					{...itemProps}
+					onDelete={() => onDelete(id)} />
+			</li>
+		)
+	});
+
+	return (
+		<ul className="app-list list-group">
+			{elements}
+		</ul>
+	)
 }
 
-export default PostList
+export default PostList;
